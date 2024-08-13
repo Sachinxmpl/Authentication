@@ -12,13 +12,26 @@
     />
   </head>
   <body>
+
+    <% if(success && success.length > 0) { %>
+              <div class="alert alert-success" role="alert">
+                  <%=  success %>
+              </div>
+    <% } %>
+    <% if(error && error.length > 0) { %>
+      <div class="alert alert-success" role="alert">
+          <%=error;
+           %>
+      </div>
+  <% } %>
+
     <form class="col-6 offset-3 mt-4" action="/login" method="POST">
       <h1>Login to the sample website</h1>
       <label for="username" class="form-label">Username</label>
       <input type="text" id="username" class="form-control" />
 
       <label for="password" class="form-label">password</label>
-      <input type="password" id="password" class="form-control" />
+      <input type="password" id="password" name="password" class="form-control" />
 
       <button class="btn btn-danger mt-4">Login </button>
     </form>

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose")
 const express = require("express")
+const bcrypt = require("bcrypt")
 
-exports.connetMongoose = () =>{
-    mongoose.connect("mongodb://localhost:27017/hi")
+exports.connetMongoose = (url) =>{
+    mongoose.connect(url)
     .then(()=>{
         console.log("Databse connected successfully ")
     })
@@ -19,8 +20,20 @@ const userSchema = new mongoose.Schema({
     } , 
     password : {
         type : String , 
-        required : true 
+        required : true  , 
+
     }
+} , {
+    timestamps : true
+})
+
+
+userSchema.pre("save" , async function(next){
+    if(!this.isModified("password")){
+        return next()
+    }
+    this.password = await bcrypt.hash(this.password,10)
+    next()
 })
 
 exports.User = mongoose.model("User",userSchema)
