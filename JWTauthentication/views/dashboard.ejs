@@ -9,6 +9,10 @@
 </head>
 <body>
         <h1> Welcome to dashboard  </h1>
-        <h2>Hello, {{user.name}}</h2>
+        <h2>Hello, <%=username%></h2>
+
+        <form method="POST" action="/logout">
+            <button>Logout</button>
+        </form>
 </body>
 </html>
