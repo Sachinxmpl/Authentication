@@ -69,7 +69,8 @@ app.post("/register", async (req, res) => {
 
     const token = jwt.sign({ username }, process.env.JWT_SECRET)
     res.cookie("token", token, {
-        httpOnly: true
+        httpOnly: true,
+        samesite: lax 
     })
     return res.redirect("/dashboard")
 })
